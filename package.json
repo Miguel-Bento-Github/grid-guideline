@@ -1,6 +1,6 @@
 {
   "name": "shadow-overlay",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Overlay grid to help developers align with the design layout",
   "source": "src/index.ts",
   "main": "dist/main.js",
@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build",
+    "publish": "parcel build && npm publish"
   },
   "devDependencies": {
     "parcel": "^2.2.1"

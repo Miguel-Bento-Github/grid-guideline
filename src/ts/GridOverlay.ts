@@ -23,7 +23,11 @@ export class GridOverlay extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
   }
 
-  attributeChangedCallback(prop, oldValue, newValue) {
+  attributeChangedCallback<T extends keyof typeof property>(
+    prop: T,
+    oldValue: this[T],
+    newValue: this[T]
+  ) {
     if (oldValue !== newValue) this[prop] = newValue;
     if (prop === property.disabled) this.disable();
   }
@@ -98,5 +102,25 @@ export class GridOverlay extends HTMLElement {
   public disable() {
     this.disabled = true;
     this.opacity = 0;
+  }
+
+  public setColumns(arg: number) {
+    this.columns = arg;
+  }
+
+  public setOpacity(arg: number) {
+    this.opacity = arg;
+  }
+
+  public setColor(arg: string) {
+    this.color = arg;
+  }
+
+  public setMargin(arg: string) {
+    this.margin = arg;
+  }
+
+  public setGutters(arg: string) {
+    this.gutters = arg;
   }
 }

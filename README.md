@@ -1,19 +1,41 @@
-### Grid Guideline usage
+## Grid Guideline usage
 
-Basic usage
+<hr>
+
+### Attributes list
+
+```
+opacity: number
+margin: Any css size unit
+gutters: Any css size unit
+disabled: boolean
+color: Any css color value
+```
+
+### Basic usage
+
+You can use the custom element by using import the main.js file in your `<head>`<br>
+The attribute `type` should be `module`
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>Grid Overlay</title>
     <script
       type="module"
       src="./node_modules/layout-grid-overlay/dist/main.js"
     ></script>
   </head>
   <body>
-    <grid-overlay></grid-overlay>
+    <grid-overlay></grid-overlay> --> Yay 🎉
   </body>
 </html>
 ```
+
+The custom attribute list above contains all attributes that can be passed to the overlay
+
+```html
+<grid-overlay color="red"></grid-overlay> --> I'm a red grid now! ⭕⭕⭕⭕
+```
+
+Hope you enjoy!

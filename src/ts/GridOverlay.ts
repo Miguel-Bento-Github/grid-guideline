@@ -57,6 +57,7 @@ export class GridOverlay extends HTMLElement {
           padding-right: ${this.margin};
           transition: all .15s ease-in-out;
           opacity: ${this.opacity};
+          pointer-events: none;
         }
 
         .grid-overlay {

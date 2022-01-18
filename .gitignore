@@ -1,0 +1,23 @@
+
+# Folders
+dist
+node_modules
+
+# Log files
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+.temp
+.cache
+.parcel-cache
+.DS_Store
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

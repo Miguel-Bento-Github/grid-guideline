@@ -1,5 +1,5 @@
 import { property } from "./const";
-import { defineColumns } from "./defineColumns";
+import { defineElements } from "./defineElements";
 import { getGridSize } from "./getGridSize";
 
 export class GridOverlay extends HTMLElement {
@@ -9,8 +9,8 @@ export class GridOverlay extends HTMLElement {
   margin: string;
   gutters: string;
   disabled: boolean;
-  container: HTMLElement;
-  shadow: ShadowRoot;
+
+  private shadow: ShadowRoot;
 
   constructor() {
     super();
@@ -20,8 +20,16 @@ export class GridOverlay extends HTMLElement {
     this.margin = "16px";
     this.gutters = "16px";
     this.disabled = false;
-    this.container = document.createElement("div");
     this.shadow = this.attachShadow({ mode: "open" });
+  }
+
+  attributeChangedCallback(prop, oldValue, newValue) {
+    if (oldValue !== newValue) this[prop] = newValue;
+    if (prop === property.disabled) this.disable();
+  }
+
+  connectedCallback() {
+    this.observe(document.body);
   }
 
   static get observedAttributes() {
@@ -35,17 +43,12 @@ export class GridOverlay extends HTMLElement {
     resizeObserver.observe(element);
   }
 
-  setColumns() {
-    const gridSize = getGridSize();
-    this.columns = gridSize;
-  }
-
-  setContent() {
-    const { container } = defineColumns();
-    this.setColumns();
-
-    this.shadow.innerHTML = `
-      <style>
+  updateStyle() {
+    let style = this.shadow.querySelector("style");
+    if (!style) {
+      style = document.createElement("style");
+    }
+    style.textContent = `
         .grid-overlay-container {
           box-sizing: border-box;
           position: fixed;
@@ -72,19 +75,28 @@ export class GridOverlay extends HTMLElement {
         }
 
         .grid-overlay span {
-          background: ${this.color};
-        }
-      </style>
-      `;
+          background: conic-gradient(from 80deg at 30% 110%, #ffffff, ${this.color});
+        }`;
 
+    return style;
+  }
+
+  setContent() {
+    const { container } = defineElements();
+    const columns = getGridSize();
+    this.columns = columns;
+    const style = this.updateStyle();
+    this.shadow.appendChild(style);
     this.shadow.appendChild(container);
   }
 
-  attributeChangedCallback(property, oldValue, newValue) {
-    if (oldValue !== newValue) this[property] = newValue;
+  public enable() {
+    const overlay = document.querySelector("grid-overlay");
+    if (!overlay) document.body.appendChild(this);
   }
 
-  connectedCallback() {
-    this.observe(document.body);
+  public disable() {
+    this.disabled = true;
+    this.opacity = 0;
   }
 }

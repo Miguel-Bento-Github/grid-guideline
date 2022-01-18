@@ -1,8 +1,6 @@
-## Grid Guideline usage
+# Grid Guideline usage
 
-<hr>
-
-### Attributes list
+## Attributes list
 
 ```
 opacity: number
@@ -12,7 +10,7 @@ disabled: boolean
 color: Any css color value
 ```
 
-### Basic usage
+### Markup mode
 
 You can use the custom element by using import the main.js file in your `<head>`<br>
 The attribute `type` should be `module`
@@ -38,4 +36,9 @@ The custom attribute list above contains all attributes that can be passed to th
 <grid-overlay color="red"></grid-overlay> --> I'm a red grid now! ⭕⭕⭕⭕
 ```
 
-Hope you enjoy!
+### Scripting mode
+
+```ts
+import { overlay } from "shadow-overlay";
+overlay.enable();
+```

@@ -1,6 +1,6 @@
 {
   "name": "shadow-overlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Overlay grid to help developers align with the design layout",
   "source": "src/index.ts",
   "main": "dist/main.js",

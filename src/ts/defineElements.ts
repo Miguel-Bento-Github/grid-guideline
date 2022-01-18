@@ -6,7 +6,7 @@ const createElement = (tag: string, className: string) => {
   return element;
 };
 
-export const defineColumns = () => {
+export const defineElements = () => {
   const gridSize = getGridSize();
   const container = createElement("span", "grid-overlay-container");
   const overlay = createElement("span", "grid-overlay");

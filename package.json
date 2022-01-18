@@ -1,8 +1,8 @@
 {
-  "name": "css-grid-guidelines",
+  "name": "layout-grid-overlay",
   "version": "1.0.0",
   "description": "Overlay grid to help developers align with the design layout",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "main": "dist/main.js",
   "author": "Miguel Bento",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "url": "https://github.com/Miguel-Bento-Github/grid-guideline.git"
   },
   "scripts": {
+    "dev": "parcel src/index.html",
     "watch": "parcel watch",
     "build": "parcel build"
   },

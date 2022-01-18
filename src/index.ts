@@ -1,2 +1,3 @@
-import { GridOverlay } from "./js/GridOverlay";
+import { GridOverlay } from "./ts/GridOverlay";
+
 customElements.define("grid-overlay", GridOverlay);

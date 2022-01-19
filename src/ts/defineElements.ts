@@ -7,14 +7,15 @@ const createElement = (tag: string, className: string) => {
 };
 
 export const defineElements = () => {
-  const gridSize = getGridSize();
   const container = createElement("span", "grid-overlay-container");
   const overlay = createElement("span", "grid-overlay");
-  container.appendChild(overlay);
+  const controller = createElement("button", "grid-controller");
 
-  for (let i = gridSize; i > 0; i--) {
+  container.append(overlay);
+
+  for (let i = getGridSize(); i > 0; i--) {
     const column = document.createElement("span");
     overlay.appendChild(column);
   }
-  return { container };
+  return { container, controller };
 };

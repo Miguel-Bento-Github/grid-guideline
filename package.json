@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "name": "shadow-overlay",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Miguel Bento",
   "description": "Overlay grid to help developers align with the design layout",
   "source": "src/index.ts",

@@ -1,10 +1,25 @@
-# Grid Guideline usage
+# Shadow Overlay
+
+ES Module `modern.js` 3.51KB <br>
+CommonJS `legacy.js` 6.44KB <br>
+
+<br><br>
+
+<hr>
+<br><br>
 
 ## Installation
 
 `npm i -D shadow-overlay`<br>
+
 `pnpm i -D shadow-overlay`<br>
+
 `yarn add -D shadow-overlay`
+
+<br><br>
+
+<hr>
+<br><br>
 
 ## Markup mode
 
@@ -30,11 +45,11 @@ The attribute `type` should be `module`
   <head>
     <script
       type="module"
-      src="./node_modules/layout-grid-overlay/dist/main.js"
+      src="./node_modules/shadow-overlay/dist/module.js"
     ></script>
   </head>
   <body>
-    <grid-overlay></grid-overlay> --> Yay 🎉
+    <grid-overlay></grid-overlay> --> custom element 🎉
   </body>
 </html>
 ```
@@ -44,6 +59,11 @@ The custom attribute list above contains all attributes that can be passed to th
 ```html
 <grid-overlay color="red"></grid-overlay> --> I'm a red grid now! ⭕⭕⭕⭕
 ```
+
+<br><br>
+
+<hr>
+<br><br>
 
 ## Scripting mode
 

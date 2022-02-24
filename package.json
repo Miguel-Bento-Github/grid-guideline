@@ -3,11 +3,13 @@
   "author": "Miguel Bento",
   "description": "Overlay grid to help developers align with the design layout",
   "name": "shadow-overlay",
-  "version": "1.2.1",
+  "version": "1.0.0",
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
   "types": "dist/types.d.ts",
+  "modern": "dist/modern.js",
+  "legacy": "dist/legacy.js",
   "repository": {
     "url": "https://github.com/Miguel-Bento-Github/grid-guideline.git"
   },
@@ -22,5 +24,17 @@
     "@parcel/transformer-typescript-types": "^2.2.1",
     "parcel": "^2.2.1",
     "typescript": ">=3.0.0"
+  },
+  "targets": {
+    "modern": {
+      "engines": {
+        "browsers": "Chrome 80"
+      }
+    },
+    "legacy": {
+      "engines": {
+        "browsers": "> 0.5%, last 2 versions, not dead"
+      }
+    }
   }
 }

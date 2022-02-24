@@ -1,5 +1,11 @@
 # Grid Guideline usage
 
+## Installation
+
+`npm i -D shadow-overlay`<br>
+`pnpm i -D shadow-overlay`<br>
+`yarn add -D shadow-overlay`
+
 ## Markup mode
 
 ### Element Attributes list
@@ -48,8 +54,8 @@ The custom attribute list above contains all attributes that can be passed to th
 Import the overlay and start the instance
 
 ```ts
-import { overlay } from "shadow-overlay";
-overlay.start();
+import { overlay } from 'shadow-overlay'
+overlay.start()
 ```
 
 ### Methods usage
@@ -57,40 +63,40 @@ overlay.start();
 #### Start
 
 ```ts
-overlay.start();
+overlay.start()
 ```
 
 #### Opacity
 
 ```ts
-overlay.setOpacity(0.4);
+overlay.setOpacity(0.4)
 ```
 
 #### Color
 
 ```ts
-overlay.setColor("red");
-overlay.setColor("ff0000");
-overlay.setColor("hsl(0, 100%, 50%)");
-overlay.setColor("rgb(255, 0, 0)");
+overlay.setColor('red')
+overlay.setColor('ff0000')
+overlay.setColor('hsl(0, 100%, 50%)')
+overlay.setColor('rgb(255, 0, 0)')
 ```
 
 #### Margin and Gutters
 
 ```ts
-overlay.setMargin("16px");
-overlay.setMargin("1em");
-overlay.setMargin("1rem");
-overlay.setMargin("5ch");
-overlay.setMargin("5%");
+overlay.setMargin('16px')
+overlay.setMargin('1em')
+overlay.setMargin('1rem')
+overlay.setMargin('5ch')
+overlay.setMargin('5%')
 ```
 
 #### Disabled and Controller
 
 ```ts
-overlay.setDisabled(true);
-overlay.setDisabled("true");
-overlay.setDisabled(false);
-overlay.setDisabled("false");
-overlay.setDisabled();
+overlay.setDisabled(true)
+overlay.setDisabled('true')
+overlay.setDisabled(false)
+overlay.setDisabled('false')
+overlay.setDisabled()
 ```

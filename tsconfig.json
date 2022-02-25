@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "removeComments": true,
     "forceConsistentCasingInFileNames": true,
     "target": "esnext",
     "module": "esnext",

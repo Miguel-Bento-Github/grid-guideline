@@ -1,59 +1,59 @@
-import { property } from "./const";
-import { defineElements } from "./defineElements";
-import { getGridSize } from "./getGridSize";
+import { property } from './const'
+import { defineElements } from './defineElements'
+import { getGridSize } from './getGridSize'
 
 export class GridOverlay extends HTMLElement {
-  opacity: number;
-  color: string;
-  margin: string;
-  gutters: string;
-  disabled?: string | boolean;
-  controller?: string | boolean;
+  opacity: number
+  color: string
+  margin: string
+  gutters: string
+  disabled?: string | boolean
+  controller?: string | boolean
 
-  private shadow: ShadowRoot;
-  private columns: number;
+  private shadow: ShadowRoot
+  private columns: number
 
   constructor() {
-    super();
-    this.opacity = 0.3;
-    this.color = "rgb(165, 165, 255)";
-    this.margin = "16px";
-    this.gutters = "16px";
+    super()
+    this.opacity = 0.3
+    this.color = 'rgb(165, 165, 255)'
+    this.margin = '16px'
+    this.gutters = '16px'
 
-    this.columns = getGridSize();
-    this.shadow = this.attachShadow({ mode: "open" });
+    this.columns = getGridSize()
+    this.shadow = this.attachShadow({ mode: 'open' })
   }
 
-  attributeChangedCallback<T extends keyof typeof property>(
-    prop: T,
-    oldValue: this[T],
-    newValue: this[T]
+  attributeChangedCallback<P extends keyof typeof property>(
+    prop: P,
+    oldValue: this[P],
+    newValue: this[P]
   ) {
-    if (prop === "controller") {
-      newValue = this.getValidControllerValue(newValue as string);
+    if (prop === 'controller') {
+      newValue = this.getValidControllerValue(newValue as string)
     }
-    if (oldValue !== newValue) this[prop] = newValue;
+    if (oldValue !== newValue) this[prop] = newValue
   }
 
-  connectedCallback() {
-    this.observe(document.body);
+  private connectedCallback() {
+    this.observe(document.body)
   }
 
   static get observedAttributes() {
-    return Object.keys(property);
+    return Object.keys(property)
   }
 
-  reset() {
-    if (!this.shadowRoot) return;
-    this.shadowRoot.innerHTML = ``;
+  private reset() {
+    if (!this.shadowRoot) return
+    this.shadowRoot.innerHTML = ``
   }
 
-  observe(element: Element) {
+  private observe(element: Element) {
     const resizeObserver = new ResizeObserver(() => {
-      this.reset();
-      this.setContent();
-    });
-    resizeObserver.observe(element);
+      this.reset()
+      this.setContent()
+    })
+    resizeObserver.observe(element)
   }
 
   private setControllerClick<E extends HTMLElement>(
@@ -62,22 +62,22 @@ export class GridOverlay extends HTMLElement {
   ) {
     controller.onclick = () => {
       if (this.disabled) {
-        this.removeAttribute("disabled");
+        this.removeAttribute('disabled')
       } else {
-        this.setAttribute("disabled", "true");
+        this.setAttribute('disabled', 'true')
       }
-      container.classList.toggle("hidden");
-    };
+      container.classList.toggle('hidden')
+    }
   }
 
-  updateStyle() {
-    let style = this.shadow.querySelector("style");
+  private updateStyle() {
+    let style = this.shadow.querySelector('style')
     if (!style) {
-      style = document.createElement("style");
+      style = document.createElement('style')
     }
     style.textContent = `
         .grid-controller {
-          display: ${this.controller ? "initial" : "none"};
+          display: ${this.controller ? 'initial' : 'none'};
           position: fixed;
           top: -.5rem;
           left: 50%;
@@ -132,50 +132,46 @@ export class GridOverlay extends HTMLElement {
             this.color
           });
           box-shadow: inset 0 0 2px #000;
-        }`;
+        }`
 
-    return style;
+    return style
   }
 
-  setContent() {
-    const { container, controller } = defineElements();
-    this.columns = getGridSize();
-    this.setControllerClick(controller, container);
-    const style = this.updateStyle();
-    this.shadow.append(style, container, controller);
+  private setContent() {
+    const { container, controller } = defineElements()
+    this.columns = getGridSize()
+    this.setControllerClick(controller, container)
+    const style = this.updateStyle()
+    this.shadow.append(style, container, controller)
   }
 
   public start() {
-    const overlay = document.querySelector("grid-overlay");
-    if (!overlay) document.body.appendChild(this);
+    const overlay = document.querySelector('grid-overlay')
+    if (!overlay) document.body.appendChild(this)
   }
 
   public setOpacity(arg: number) {
-    this.opacity = arg;
+    this.opacity = arg
   }
 
   public setColor(arg: string) {
-    this.color = arg;
+    this.color = arg
   }
 
   public setMargin(arg: string) {
-    this.margin = arg;
+    this.margin = arg
   }
 
   public setGutters(arg: string) {
-    this.gutters = arg;
-  }
-
-  public setDisabled(arg?: string) {
-    this.disabled = arg?.toString() || "";
+    this.gutters = arg
   }
 
   public setController(arg?: string | boolean) {
-    this.controller = arg?.toString() || "";
+    this.controller = arg?.toString() || ''
   }
 
-  getValidControllerValue(arg: string) {
-    if (arg === "") return "true";
-    return JSON.parse(arg);
+  private getValidControllerValue(arg: string) {
+    if (arg === '') return 'true'
+    return JSON.parse(arg)
   }
 }

@@ -1,6 +1,5 @@
-import { GridOverlay } from "./ts/GridOverlay";
+import { GridOverlay } from './ts/GridOverlay'
 
-customElements.define("grid-overlay", GridOverlay);
+customElements.define('grid-overlay', GridOverlay)
 
-export const overlay = new GridOverlay();
-export type Overlay = typeof overlay;
+export const overlay = new GridOverlay()

@@ -114,9 +114,9 @@ overlay.setMargin('5%')
 #### Disabled and Controller
 
 ```ts
-overlay.setDisabled(true)
-overlay.setDisabled('true')
-overlay.setDisabled(false)
-overlay.setDisabled('false')
-overlay.setDisabled()
+overlay.disabled = true
+overlay.disabled = 'true'
+overlay.disabled = false
+overlay.disabled = 'false'
+overlay.disabled = undefined
 ```

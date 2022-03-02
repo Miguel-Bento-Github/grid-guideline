@@ -4,7 +4,8 @@ const $3dd06c5b72a34746$export$d541bacb2bda4494 = {
     margin: 'margin',
     gutters: 'gutters',
     disabled: 'disabled',
-    controller: 'controller'
+    controller: 'controller',
+    width: 'width'
 };
 
 
@@ -43,24 +44,28 @@ const $4236c468c4b52191$export$db04bbde7ce01e09 = ()=>{
 class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
     constructor(){
         super();
-        this.opacity = 0.3;
-        this.color = 'rgb(165, 165, 255)';
-        this.margin = '16px';
-        this.gutters = '16px';
-        this.columns = $68c5ef1856c63da6$export$3a0507da8b146ff1();
-        this.shadow = this.attachShadow({
-            mode: 'open'
+        this.option = Object.seal({
+            opacity: 0.3,
+            color: 'rgb(165, 165, 255)',
+            margin: '16px',
+            gutters: '16px',
+            width: '1200px'
         });
-    }
-    attributeChangedCallback(prop, oldValue, newValue) {
-        if (prop === 'controller') newValue = this.getValidControllerValue(newValue);
-        if (oldValue !== newValue) this[prop] = newValue;
-    }
-    connectedCallback() {
-        this.observe(document.body);
+        this.columns = $68c5ef1856c63da6$export$3a0507da8b146ff1();
+        this.shadow = Object.seal(this.attachShadow({
+            mode: 'open'
+        }));
     }
     static get observedAttributes() {
         return Object.keys($3dd06c5b72a34746$export$d541bacb2bda4494);
+    }
+    attributeChangedCallback(prop, oldValue, newValue) {
+        const isDifferent = oldValue !== newValue;
+        if (prop === 'controller' && isDifferent && typeof newValue === 'string') newValue = this.getValidControllerValue(newValue);
+        if (isDifferent) this.option[prop] = newValue;
+    }
+    connectedCallback() {
+        this.observe(document.body);
     }
     reset() {
         if (!this.shadowRoot) return;
@@ -75,7 +80,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
     }
     setControllerClick(controller, container) {
         controller.onclick = ()=>{
-            if (this.disabled) this.removeAttribute('disabled');
+            if (this.option.disabled) this.removeAttribute('disabled');
             else this.setAttribute('disabled', 'true');
             container.classList.toggle('hidden');
         };
@@ -85,7 +90,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
         if (!style) style = document.createElement('style');
         style.textContent = `
         .grid-controller {
-          display: ${this.controller ? 'initial' : 'none'};
+          display: ${this.option.controller ? 'initial' : 'none'};
           position: fixed;
           top: -.5rem;
           left: 50%;
@@ -97,7 +102,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
           pointer-events: all;
           border: 0;
           isolation: isolate;
-          box-shadow: inset 0 0 2px 2px ${this.color};
+          box-shadow: inset 0 0 2px 2px ${this.option.color};
           transition: transform .15s ease-in-out;
         }
 
@@ -112,9 +117,9 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
           left: 0;
           width: 100vw;
           height: 100vh;
-          padding-left: ${this.margin};
-          padding-right: ${this.margin};
-          opacity: ${this.opacity};
+          padding-left: ${this.option.margin};
+          padding-right: ${this.option.margin};
+          opacity: ${this.option.opacity};
           pointer-events: none;
           transform: translateY(0);
           transition: all .15s ease-in-out;
@@ -123,11 +128,11 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
         .grid-overlay {
           width: 100%;
           height: 100%;
-          max-width: 1200px;
+          max-width: ${this.option.width};
           margin: auto;
           display: grid;
           grid-template-columns: repeat(${this.columns}, 1fr);
-          gap: ${this.gutters};
+          gap: ${this.option.gutters};
           transition: all .15s ease-in-out;
         }
 
@@ -136,7 +141,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
         }
 
         .grid-overlay span {
-          background: conic-gradient(from 80deg at 30% 110%, #ffffff, ${this.color});
+          background: conic-gradient(from 80deg at 30% 110%, #ffffff, ${this.option.color});
           box-shadow: inset 0 0 2px #000;
         }`;
         return style;
@@ -153,22 +158,31 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
         if (!overlay) document.body.appendChild(this);
     }
     setOpacity(arg) {
-        this.opacity = arg;
+        this.option.opacity = arg;
     }
     setColor(arg) {
-        this.color = arg;
+        this.option.color = arg;
+    }
+    setWidth(arg) {
+        this.option.width = arg;
     }
     setMargin(arg) {
-        this.margin = arg;
+        this.option.margin = arg;
     }
     setGutters(arg) {
-        this.gutters = arg;
+        this.option.gutters = arg;
     }
     setController(arg) {
-        this.controller = arg?.toString() || '';
+        this.option.controller = arg;
     }
-    getValidControllerValue(arg) {
-        if (arg === '') return 'true';
+    /**
+   * Allow the usage of the controller option on a template without `arg`
+   * eg:
+   * ```html
+   * <grid-overlay controller></grid-overlay>
+   * ```
+   */ getValidControllerValue(arg) {
+        if (arg === '') return true;
         return JSON.parse(arg);
     }
 }
@@ -176,6 +190,8 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
 
 customElements.define('grid-overlay', $8f3288fd5d8e8768$export$1c41ff9dbe11e487);
 const $149c1bd638913645$export$29dd17c7f3c81c36 = new $8f3288fd5d8e8768$export$1c41ff9dbe11e487();
+$149c1bd638913645$export$29dd17c7f3c81c36.start();
+$149c1bd638913645$export$29dd17c7f3c81c36.setWidth('70%');
 
 
 export {$149c1bd638913645$export$29dd17c7f3c81c36 as overlay};

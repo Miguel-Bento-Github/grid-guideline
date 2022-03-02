@@ -1,46 +1,46 @@
-import { property } from './const'
+import { Property, property } from './const'
 import { defineElements } from './defineElements'
 import { getGridSize } from './getGridSize'
 
 export class GridOverlay extends HTMLElement {
-  opacity: number
-  color: string
-  margin: string
-  gutters: string
-  disabled?: string | boolean
-  controller?: string | boolean
-
+  private option: Property
   private shadow: ShadowRoot
   private columns: number
 
   constructor() {
     super()
-    this.opacity = 0.3
-    this.color = 'rgb(165, 165, 255)'
-    this.margin = '16px'
-    this.gutters = '16px'
+    this.option = Object.seal({
+      opacity: 0.3,
+      color: 'rgb(165, 165, 255)',
+      margin: '16px',
+      gutters: '16px',
+      width: '1200px',
+    })
 
     this.columns = getGridSize()
-    this.shadow = this.attachShadow({ mode: 'open' })
-  }
-
-  attributeChangedCallback<P extends keyof typeof property>(
-    prop: P,
-    oldValue: this[P],
-    newValue: this[P]
-  ) {
-    if (prop === 'controller') {
-      newValue = this.getValidControllerValue(newValue as string)
-    }
-    if (oldValue !== newValue) this[prop] = newValue
-  }
-
-  private connectedCallback() {
-    this.observe(document.body)
+    this.shadow = Object.seal(this.attachShadow({ mode: 'open' }))
   }
 
   static get observedAttributes() {
     return Object.keys(property)
+  }
+
+  private attributeChangedCallback<P extends keyof typeof property>(
+    prop: P,
+    oldValue: Property[P],
+    newValue: Property[P]
+  ) {
+    const isDifferent = oldValue !== newValue
+
+    if (prop === 'controller' && isDifferent && typeof newValue === 'string') {
+      newValue = this.getValidControllerValue(newValue)
+    }
+
+    if (isDifferent) this.option[prop] = newValue
+  }
+
+  private connectedCallback() {
+    this.observe(document.body)
   }
 
   private reset() {
@@ -61,7 +61,7 @@ export class GridOverlay extends HTMLElement {
     container: E
   ) {
     controller.onclick = () => {
-      if (this.disabled) {
+      if (this.option.disabled) {
         this.removeAttribute('disabled')
       } else {
         this.setAttribute('disabled', 'true')
@@ -77,7 +77,7 @@ export class GridOverlay extends HTMLElement {
     }
     style.textContent = `
         .grid-controller {
-          display: ${this.controller ? 'initial' : 'none'};
+          display: ${this.option.controller ? 'initial' : 'none'};
           position: fixed;
           top: -.5rem;
           left: 50%;
@@ -89,7 +89,7 @@ export class GridOverlay extends HTMLElement {
           pointer-events: all;
           border: 0;
           isolation: isolate;
-          box-shadow: inset 0 0 2px 2px ${this.color};
+          box-shadow: inset 0 0 2px 2px ${this.option.color};
           transition: transform .15s ease-in-out;
         }
 
@@ -104,9 +104,9 @@ export class GridOverlay extends HTMLElement {
           left: 0;
           width: 100vw;
           height: 100vh;
-          padding-left: ${this.margin};
-          padding-right: ${this.margin};
-          opacity: ${this.opacity};
+          padding-left: ${this.option.margin};
+          padding-right: ${this.option.margin};
+          opacity: ${this.option.opacity};
           pointer-events: none;
           transform: translateY(0);
           transition: all .15s ease-in-out;
@@ -115,11 +115,11 @@ export class GridOverlay extends HTMLElement {
         .grid-overlay {
           width: 100%;
           height: 100%;
-          max-width: 1200px;
+          max-width: ${this.option.width};
           margin: auto;
           display: grid;
           grid-template-columns: repeat(${this.columns}, 1fr);
-          gap: ${this.gutters};
+          gap: ${this.option.gutters};
           transition: all .15s ease-in-out;
         }
 
@@ -129,7 +129,7 @@ export class GridOverlay extends HTMLElement {
 
         .grid-overlay span {
           background: conic-gradient(from 80deg at 30% 110%, #ffffff, ${
-            this.color
+            this.option.color
           });
           box-shadow: inset 0 0 2px #000;
         }`
@@ -151,27 +151,38 @@ export class GridOverlay extends HTMLElement {
   }
 
   public setOpacity(arg: number) {
-    this.opacity = arg
+    this.option.opacity = arg
   }
 
   public setColor(arg: string) {
-    this.color = arg
+    this.option.color = arg
+  }
+
+  public setWidth(arg: string) {
+    this.option.width = arg
   }
 
   public setMargin(arg: string) {
-    this.margin = arg
+    this.option.margin = arg
   }
 
   public setGutters(arg: string) {
-    this.gutters = arg
+    this.option.gutters = arg
   }
 
-  public setController(arg?: string | boolean) {
-    this.controller = arg?.toString() || ''
+  public setController(arg: boolean) {
+    this.option.controller = arg
   }
 
+  /**
+   * Allow the usage of the controller option on a template without `arg`
+   * eg:
+   * ```html
+   * <grid-overlay controller></grid-overlay>
+   * ```
+   */
   private getValidControllerValue(arg: string) {
-    if (arg === '') return 'true'
+    if (arg === '') return true
     return JSON.parse(arg)
   }
 }

@@ -1,7 +1,7 @@
 # Shadow Overlay
 
-ES Module `module.js` 5.43KB <br>
-CommonJS `index.js` 6.35KB <br>
+ES Module `module.js` 5.92KB <br>
+CommonJS `index.js` 6.58KB <br>
 
 <br><br>
 
@@ -31,6 +31,7 @@ CommonJS `index.js` 6.35KB <br>
 | color      | Any css valid `color` unit                                              |
 | margin     | Any css `size` unit                                                     |
 | gutters    | Any css `size` unit                                                     |
+| width      | Any css `size` unit                                                     |
 | disabled   | https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled   |
 | controller | Similar to disabled, `controller='true'` or just `controller` will work |
 
@@ -76,6 +77,7 @@ The custom attribute list above contains all attributes that can be passed to th
 | setColor      | any css `color`          |
 | setMargin     | Any css `size` unit      |
 | setGutters    | Any css `size` unit      |
+| setWidth      | Any css `size` unit      |
 | setController | `boolean`                |
 
 ### Basic usage
@@ -110,7 +112,7 @@ overlay.setColor('hsl(0, 100%, 50%)')
 overlay.setColor('rgb(255, 0, 0)')
 ```
 
-#### Margin and Gutters
+#### Margin, Gutters
 
 ```ts
 overlay.setMargin('16px')
@@ -118,6 +120,17 @@ overlay.setMargin('1em')
 overlay.setMargin('1rem')
 overlay.setMargin('5ch')
 overlay.setMargin('5%')
+```
+
+#### Width
+
+be careful not to use values that are too small or you risk not being able to see the grid
+
+```ts
+overlay.setWidth('920px')
+overlay.setWidth('50rem')
+overlay.setWidth('90ch')
+overlay.setWidth('90%')
 ```
 
 #### Controller

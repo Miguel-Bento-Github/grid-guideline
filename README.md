@@ -1,7 +1,7 @@
 # Shadow Overlay
 
-ES Module `modern.js` 3.51KB <br>
-CommonJS `legacy.js` 6.44KB <br>
+ES Module `module.js` 5.43KB <br>
+CommonJS `index.js` 6.35KB <br>
 
 <br><br>
 
@@ -25,7 +25,7 @@ CommonJS `legacy.js` 6.44KB <br>
 
 ### Element Attributes list
 
-| attribute  | usage                                                                   |
+| attribute  | type                                                                    |
 | ---------- | ----------------------------------------------------------------------- |
 | opacity    | `number`                                                                |
 | color      | Any css valid `color` unit                                              |
@@ -69,6 +69,15 @@ The custom attribute list above contains all attributes that can be passed to th
 
 ### Methods
 
+| attribute     | type                     |
+| ------------- | ------------------------ |
+| start         | `undefined`              |
+| setOpacity    | `number` between 0 and 1 |
+| setColor      | any css `color`          |
+| setMargin     | Any css `size` unit      |
+| setGutters    | Any css `size` unit      |
+| setController | `boolean`                |
+
 ### Basic usage
 
 Import the overlay and start the instance
@@ -111,12 +120,8 @@ overlay.setMargin('5ch')
 overlay.setMargin('5%')
 ```
 
-#### Disabled and Controller
+#### Controller
 
 ```ts
-overlay.disabled = true
-overlay.disabled = 'true'
-overlay.disabled = false
-overlay.disabled = 'false'
-overlay.disabled = undefined
+overlay.setController(true)
 ```

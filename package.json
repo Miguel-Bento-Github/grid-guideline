@@ -3,9 +3,14 @@
   "author": "Miguel Bento",
   "description": "Overlay grid to help developers align with the design layout",
   "name": "shadow-overlay",
+  "url": "https://www.dev24.net/",
   "version": "1.0.1",
   "repository": {
-    "url": "https://github.com/Miguel-Bento-Github/grid-guideline.git"
+    "url": "https://github.com/Miguel-Bento-Github/shadow-overlay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Miguel-Bento-Github/shadow-overlay/issues",
+    "email": "bento-miguel@outlook.com"
   },
   "scripts": {
     "dev": "parcel src/index.html",

@@ -1,5 +1,6 @@
 # Shadow Overlay
 
+GZipped: 1.6Kb <br>
 ES Module `module.js` 5.92KB <br>
 CommonJS `index.js` 6.58KB <br>
 

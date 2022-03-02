@@ -1,8 +1,8 @@
 # Shadow Overlay
 
 GZipped: 1.6Kb <br>
-ES Module `module.js` 5.92KB <br>
-CommonJS `index.js` 6.58KB <br>
+ES Module `module.js` 5.99KB <br>
+CommonJS `index.js` 6.63KB <br>
 
 <br><br>
 
@@ -21,6 +21,13 @@ CommonJS `index.js` 6.58KB <br>
 
 <hr>
 <br><br>
+
+### Most basic usage
+
+```ts
+// index.ts
+import 'shadow-overlay'
+```
 
 ## Markup mode
 
@@ -51,7 +58,7 @@ The attribute `type` should be `module`
     ></script>
   </head>
   <body>
-    <grid-overlay></grid-overlay> --> custom element 🎉
+    <grid-overlay /> --> custom element 🎉
   </body>
 </html>
 ```
@@ -59,7 +66,7 @@ The attribute `type` should be `module`
 The custom attribute list above contains all attributes that can be passed to the overlay
 
 ```html
-<grid-overlay color="red"></grid-overlay> --> I'm a red grid now! ⭕⭕⭕⭕
+<grid-overlay color="red" /> --> I'm a red grid now! ⭕⭕⭕⭕
 ```
 
 <br><br>

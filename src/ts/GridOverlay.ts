@@ -15,13 +15,15 @@ export class GridOverlay extends HTMLElement {
       margin: '16px',
       gutters: '16px',
       width: '1200px',
+      controller: false,
+      disabled: false,
     })
 
     this.columns = getGridSize()
     this.shadow = Object.seal(this.attachShadow({ mode: 'open' }))
   }
 
-  static get observedAttributes() {
+  private static get observedAttributes() {
     return Object.keys(property)
   }
 
@@ -32,8 +34,8 @@ export class GridOverlay extends HTMLElement {
   ) {
     const isDifferent = oldValue !== newValue
 
-    if (prop === 'controller' && isDifferent && typeof newValue === 'string') {
-      newValue = this.getValidControllerValue(newValue)
+    if (prop === 'controller' && isDifferent) {
+      newValue = this.getValidControllerValue(newValue as string)
     }
 
     if (isDifferent) this.option[prop] = newValue
@@ -170,8 +172,8 @@ export class GridOverlay extends HTMLElement {
     this.option.gutters = arg
   }
 
-  public setController(arg: boolean) {
-    this.option.controller = arg
+  public setController(arg?: string | boolean) {
+    this.option.controller = arg?.toString() || ''
   }
 
   /**
@@ -182,6 +184,8 @@ export class GridOverlay extends HTMLElement {
    * ```
    */
   private getValidControllerValue(arg: string) {
+    console.log(arg)
+
     if (arg === '') return true
     return JSON.parse(arg)
   }

@@ -3,9 +3,9 @@ export const property = {
   color: 'color',
   margin: 'margin',
   gutters: 'gutters',
+  width: 'width',
   disabled: 'disabled',
   controller: 'controller',
-  width: 'width',
 } as const
 
 export interface Property {
@@ -13,7 +13,7 @@ export interface Property {
   color: string
   margin: string
   gutters: string
-  width?: string
-  disabled?: string | boolean
-  controller?: string | boolean
+  width: string
+  disabled: string | boolean
+  controller: string | boolean
 }

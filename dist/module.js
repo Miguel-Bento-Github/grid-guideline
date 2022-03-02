@@ -3,9 +3,9 @@ const $3dd06c5b72a34746$export$d541bacb2bda4494 = {
     color: 'color',
     margin: 'margin',
     gutters: 'gutters',
+    width: 'width',
     disabled: 'disabled',
-    controller: 'controller',
-    width: 'width'
+    controller: 'controller'
 };
 
 
@@ -49,7 +49,9 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
             color: 'rgb(165, 165, 255)',
             margin: '16px',
             gutters: '16px',
-            width: '1200px'
+            width: '1200px',
+            controller: false,
+            disabled: false
         });
         this.columns = $68c5ef1856c63da6$export$3a0507da8b146ff1();
         this.shadow = Object.seal(this.attachShadow({
@@ -61,7 +63,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
     }
     attributeChangedCallback(prop, oldValue, newValue) {
         const isDifferent = oldValue !== newValue;
-        if (prop === 'controller' && isDifferent && typeof newValue === 'string') newValue = this.getValidControllerValue(newValue);
+        if (prop === 'controller' && isDifferent) newValue = this.getValidControllerValue(newValue);
         if (isDifferent) this.option[prop] = newValue;
     }
     connectedCallback() {
@@ -173,7 +175,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
         this.option.gutters = arg;
     }
     setController(arg) {
-        this.option.controller = arg;
+        this.option.controller = arg?.toString() || '';
     }
     /**
    * Allow the usage of the controller option on a template without `arg`
@@ -182,6 +184,7 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
    * <grid-overlay controller></grid-overlay>
    * ```
    */ getValidControllerValue(arg) {
+        console.log(arg);
         if (arg === '') return true;
         return JSON.parse(arg);
     }
@@ -190,8 +193,6 @@ class $8f3288fd5d8e8768$export$1c41ff9dbe11e487 extends HTMLElement {
 
 customElements.define('grid-overlay', $8f3288fd5d8e8768$export$1c41ff9dbe11e487);
 const $149c1bd638913645$export$29dd17c7f3c81c36 = new $8f3288fd5d8e8768$export$1c41ff9dbe11e487();
-$149c1bd638913645$export$29dd17c7f3c81c36.start();
-$149c1bd638913645$export$29dd17c7f3c81c36.setWidth('70%');
 
 
 export {$149c1bd638913645$export$29dd17c7f3c81c36 as overlay};

@@ -1,5 +1,9 @@
 # Shadow Overlay
 
+Layout gives more meaning to design which makes it look more appealing, it'll help you maintain a balance between screens.
+
+![shadow](./shadow.png)
+
 GZipped: 1.6Kb <br>
 ES Module `module.js` 5.99KB <br>
 CommonJS `index.js` 6.63KB <br>
@@ -26,7 +30,7 @@ CommonJS `index.js` 6.63KB <br>
 
 ```ts
 // index.ts
-import 'shadow-overlay'
+import "shadow-overlay";
 ```
 
 ## Markup mode
@@ -93,8 +97,8 @@ The custom attribute list above contains all attributes that can be passed to th
 Import the overlay and start the instance
 
 ```ts
-import { overlay } from 'shadow-overlay'
-overlay.start()
+import { overlay } from "shadow-overlay";
+overlay.start();
 ```
 
 ### Methods usage
@@ -102,32 +106,32 @@ overlay.start()
 #### Start
 
 ```ts
-overlay.start()
+overlay.start();
 ```
 
 #### Opacity
 
 ```ts
-overlay.setOpacity(0.4)
+overlay.setOpacity(0.4);
 ```
 
 #### Color
 
 ```ts
-overlay.setColor('red')
-overlay.setColor('ff0000')
-overlay.setColor('hsl(0, 100%, 50%)')
-overlay.setColor('rgb(255, 0, 0)')
+overlay.setColor("red");
+overlay.setColor("ff0000");
+overlay.setColor("hsl(0, 100%, 50%)");
+overlay.setColor("rgb(255, 0, 0)");
 ```
 
 #### Margin, Gutters
 
 ```ts
-overlay.setMargin('16px')
-overlay.setMargin('1em')
-overlay.setMargin('1rem')
-overlay.setMargin('5ch')
-overlay.setMargin('5%')
+overlay.setMargin("16px");
+overlay.setMargin("1em");
+overlay.setMargin("1rem");
+overlay.setMargin("5ch");
+overlay.setMargin("5%");
 ```
 
 #### Width
@@ -135,14 +139,14 @@ overlay.setMargin('5%')
 be careful not to use values that are too small or you risk not being able to see the grid
 
 ```ts
-overlay.setWidth('920px')
-overlay.setWidth('50rem')
-overlay.setWidth('90ch')
-overlay.setWidth('90%')
+overlay.setWidth("920px");
+overlay.setWidth("50rem");
+overlay.setWidth("90ch");
+overlay.setWidth("90%");
 ```
 
 #### Controller
 
 ```ts
-overlay.setController(true)
+overlay.setController(true);
 ```
